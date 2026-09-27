@@ -1,6 +1,5 @@
-import dayjs from "dayjs";
-import { formatMoney } from "../../utils/money";
-import { DeliveryOptions } from './DeliveryOptions';
+import { DeliveryDate } from './DeliveryDate';
+import { CartItemDetails } from "./CartItemDetails";
 
 export function OrderSummary({ cart, deliveryOptions }) {
   return (
@@ -15,39 +14,12 @@ export function OrderSummary({ cart, deliveryOptions }) {
 
           return (
             <div key={cartItem.productId} className="cart-item-container">
-              <div className="delivery-date">
-                Delivery date:{" "}
-                {dayjs(selectedDeliveryOption.estimatedDeliveryTimeMs).format(
-                  "dddd, MMMM D",
-                )}
-              </div>
+              <DeliveryDate selectedDeliveryOption={selectedDeliveryOption}/>
 
-              <div className="cart-item-details-grid">
-                <img className="product-image" src={cartItem.product.image} />
-
-                <div className="cart-item-details">
-                  <div className="product-name">{cartItem.product.name}</div>
-                  <div className="product-price">
-                    {formatMoney(cartItem.product.priceCents)}
-                  </div>
-                  <div className="product-quantity">
-                    <span>
-                      Quantity: <span className="quantity-label">2</span>
-                    </span>
-                    <span className="update-quantity-link link-primary">
-                      Update
-                    </span>
-                    <span className="delete-quantity-link link-primary">
-                      Delete
-                    </span>
-                  </div>
-                </div>
-
-                <DeliveryOptions
-                  deliveryOptions={deliveryOptions}
-                  cartItem={cartItem}
-                />
-              </div>
+              <CartItemDetails
+                cartItem={cartItem}
+                deliveryOptions={deliveryOptions}
+              />
             </div>
           );
         })}
