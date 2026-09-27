@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { CheckOutHeader } from "./CheckOutHeader";
-import { OrderSummary } from './OrderSummary';
-import { PaymentSummary } from './PaymentSummary';
+import { OrderSummary } from "./OrderSummary";
+import { PaymentSummary } from "./PaymentSummary";
 import "./CheckOutHeader.css";
 import "./CheckoutPage.css";
 
@@ -22,6 +22,20 @@ export function CheckOutPage({ cart }) {
     });
   }, []);
 
+  useEffect(() => {
+    const getCheckoutData = async () => {
+      let response = await axios.get(
+        "/api/delivery-options?expand=estimatedDeliveryTime",
+      );
+      setDeliveryOptions(response.data);
+
+      response = await axios.get("/api/payment-summary");
+      setPaymentSummary(response.data);
+    };
+
+    getCheckoutData();
+  }, []);
+
   return (
     <>
       <CheckOutHeader />
@@ -34,7 +48,6 @@ export function CheckOutPage({ cart }) {
         <div className="checkout-grid">
           <OrderSummary cart={cart} deliveryOptions={deliveryOptions} />
           <PaymentSummary paymentSummary={paymentSummary} />
-
         </div>
       </div>
     </>
