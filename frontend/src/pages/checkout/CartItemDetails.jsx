@@ -2,7 +2,7 @@
 import { formatMoney } from "../../utils/money";
 import { DeliveryOptions } from "./DeliveryOptions";
 
-export function CartItemDetails({ cartItem, deliveryOptions }) {
+export function CartItemDetails({ cartItem, deliveryOptions, loadCart }) {
   return (
     <>
       <div className="cart-item-details-grid">
@@ -25,6 +25,7 @@ export function CartItemDetails({ cartItem, deliveryOptions }) {
         <DeliveryOptions
           deliveryOptions={deliveryOptions}
           cartItem={cartItem}
+          loadCart={loadCart}
         />
       </div>
     </>
