@@ -7,6 +7,8 @@ import { OrdersPage } from "./pages/orders/OrdersPage";
 import { TrackingPage } from "./pages/TrackingPage";
 import { Error404Page } from "./pages/Error404Page";
 import "./App.css";
+//8c
+window.axios = axios;
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -31,7 +33,7 @@ function App() {
       <Routes>
         <Route index element={<HomePage cart={cart} loadCart={loadCart}/>} />
         <Route path="/checkout" element={<CheckOutPage cart={cart} loadCart={loadCart} />} />
-        <Route path="/orders" element={<OrdersPage cart={cart} />} />
+        <Route path="/orders" element={<OrdersPage cart={cart} loadCart={loadCart}/>} />
         <Route
           path="/tracking/:orderId/:productId"
           element={<TrackingPage cart={cart} />}

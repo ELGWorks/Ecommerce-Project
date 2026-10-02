@@ -5,7 +5,7 @@ import { OrdersGrid } from "./OrdersGrid";
 import { Header } from "../../components/Header";
 
 
-export function OrdersPage({ cart }) {
+export function OrdersPage({ cart, loadCart }) {
   const [orders, setOrders] = useState([]);
 
   //7a
@@ -25,7 +25,7 @@ export function OrdersPage({ cart }) {
 
       <div className="orders-page">
         <div className="page-title">Your Orders</div>
-        <OrdersGrid orders={orders}/>
+        <OrdersGrid orders={orders} loadCart={loadCart}/>
       </div>
     </>
   );

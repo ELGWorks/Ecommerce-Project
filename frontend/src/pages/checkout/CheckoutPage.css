@@ -85,6 +85,10 @@
   column-gap: 25px;
 }
 
+.input-quantity {
+  width: 50px;
+}
+
 @media (max-width: 1000px) {
   .checkout-page .cart-item-details-grid {
     grid-template-columns: 100px 1fr;

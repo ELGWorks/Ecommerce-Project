@@ -32,6 +32,7 @@ export function CheckOutPage({ cart, loadCart }) {
     getCheckoutData();
   }, []);
 
+  //8b
   useEffect(() => {
     const loadPaymentSummary = async () => {
       const response = await axios.get("/api/payment-summary");
@@ -42,7 +43,7 @@ export function CheckOutPage({ cart, loadCart }) {
 
   return (
     <>
-      <CheckOutHeader />
+      <CheckOutHeader cart={cart}/>
       <title>Checkout</title>
       <link rel="icon" type="image/svg+xml" href="/cart-favicon.png" />
 
