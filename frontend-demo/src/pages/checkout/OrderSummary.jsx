@@ -1,4 +1,4 @@
-import { DeliveryDate } from './DeliveryDate';
+import { DeliveryDate } from "./DeliveryDate";
 import { CartItemDetails } from "./CartItemDetails";
 
 export function OrderSummary({ cart, deliveryOptions, loadCart }) {
@@ -14,9 +14,10 @@ export function OrderSummary({ cart, deliveryOptions, loadCart }) {
 
           return (
             <div key={cartItem.productId} className="cart-item-container">
-              <DeliveryDate selectedDeliveryOption={selectedDeliveryOption}/>
+              <DeliveryDate selectedDeliveryOption={selectedDeliveryOption} />
 
               <CartItemDetails
+                cart={cart}
                 cartItem={cartItem}
                 deliveryOptions={deliveryOptions}
                 loadCart={loadCart}

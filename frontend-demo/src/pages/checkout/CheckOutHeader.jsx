@@ -6,7 +6,11 @@ import Logo from '../../assets/images/logo.png';
 import MobileLogo from '../../assets/images/mobile-logo.png';
 
 export function CheckOutHeader({ cart }) {
-  console.log(cart.quantity)
+  // cart is an array of items, so the header shows the total quantity.
+  const totalQuantity = cart.reduce((total, cartItem) => {
+    return total + cartItem.quantity;
+  }, 0);
+
   return (
     <div className="checkout-header">
       <div className="header-content">
@@ -20,7 +24,7 @@ export function CheckOutHeader({ cart }) {
         <div className="checkout-header-middle-section">
           Checkout (
           <Link className="return-to-home-link" to="/">
-            {cart.quantity <= 0 ? '0' : cart.quantity}
+            {totalQuantity}
           </Link>
           )
         </div>

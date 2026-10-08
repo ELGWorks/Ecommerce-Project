@@ -1,6 +1,6 @@
 import { formatMoney } from "../../utils/money";
 import CheckmarkIcon from "../../assets/images/icons/checkmark.png";
-import axios from "axios";
+import { addProductToCart } from "../../data/cart";
 import { useState } from "react";
 
 export function Product({ product, loadCart }) {
@@ -8,12 +8,9 @@ export function Product({ product, loadCart }) {
   //8d
   const [isAddedMessage, setIsAddedMessage] = useState(false);
 
-  const addToCart = async () => {
-    await axios.post("/api/cart-items", {
-      productId: product.id,
-      quantity,
-    });
-    await loadCart();
+  // for mocked data
+  const addToCart = () => {
+    loadCart(addProductToCart(product.id, quantity));
 
     setIsAddedMessage(true);
 

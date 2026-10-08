@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import BuyAgainIcon from "../../assets/images/icons/buy-again.png";
-import axios from "axios";
+import { addProductToCart } from "../../data/cart";
 import { Fragment } from "react";
 import { useNavigate } from "react-router";
 
@@ -12,13 +12,9 @@ export function OrderDetailsGrid({ order, loadCart }) {
     <>
       <div className="order-details-grid">
         {order.products.map((orderProduct) => {
-          const orderAddToCart = async () => {
-            await axios.post("/api/cart-items", {
-              productId: orderProduct.productId,
-              quantity: 1,
-            });
-
-            await loadCart();
+          // for mocked data
+          const orderAddToCart = () => {
+            loadCart(addProductToCart(orderProduct.productId, 1));
             navigate("/checkout");
           };
           return (

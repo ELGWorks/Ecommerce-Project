@@ -10,17 +10,9 @@ export default defineConfig({
       },
     }),
   ],
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:3000",
-      },
-      "/images": {
-        target: "http://localhost:3000",
-      },
-    },
-  },
+  // Mock-data build: no backend is needed, so there is no dev proxy.
+  // Product/rating images are served from `public/images`.
   build: {
-    outDir: "../backend-ai/dist",
+    outDir: "dist",
   },
 });

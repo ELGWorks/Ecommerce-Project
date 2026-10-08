@@ -1,8 +1,9 @@
-import axios from "axios";
+// import axios from "axios";
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { ProductsGrid } from "./ProductsGrid";
 import { useSearchParams } from "react-router";
+import { products as productData } from "../../data/products";
 import "./HomePage.css";
 
 export function HomePage({ cart, loadCart }) {
@@ -19,16 +20,31 @@ export function HomePage({ cart, loadCart }) {
   //     setProducts(response.data);
   //   });
   // }, []);
-  useEffect(() => {
-    const getHomeData = async () => {
-      const urlPath = search
-        ? `/api/products?search=${search}`
-        : "/api/products";
-      const response = await axios.get(urlPath);
-      setProducts(response.data);
-    };
 
-    getHomeData();
+  // for real backend folder
+  // useEffect(() => {
+  //   const getHomeData = async () => {
+  //     const urlPath = search
+  //       ? `/api/products?search=${search}`
+  //       : "/api/products";
+  //     const response = await axios.get(urlPath);
+  //     setProducts(response.data);
+  //   };
+
+  //   getHomeData();
+  // }, [search]);
+
+  // for mocked data
+  useEffect(() => {
+    if (search) {
+      const filteredProducts = productData.filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase()),
+      );
+
+      setProducts(filteredProducts);
+    } else {
+      setProducts(productData);
+    }
   }, [search]);
 
   return (

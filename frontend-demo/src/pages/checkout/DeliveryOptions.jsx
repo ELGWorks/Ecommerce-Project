@@ -1,13 +1,11 @@
-import { formatMoney } from '../../utils/money';
-import axios from 'axios';
+import { formatMoney } from "../../utils/money";
+//import axios from "axios";
 import dayjs from "dayjs";
 
-export function DeliveryOptions({ deliveryOptions, cartItem, loadCart }) {
+export function DeliveryOptions({ cart, deliveryOptions, cartItem, loadCart }) {
   return (
     <div className="delivery-options">
-      <div className="delivery-options-title">
-        Choose a delivery option:
-      </div>
+      <div className="delivery-options-title">Choose a delivery option:</div>
 
       {deliveryOptions.map((deliveryOption) => {
         let priceString = "FREE Shipping";
@@ -16,11 +14,28 @@ export function DeliveryOptions({ deliveryOptions, cartItem, loadCart }) {
           priceString = `${formatMoney(deliveryOption.priceCents)}`;
         }
 
-        const updateDeliveryOption = async () => {
-          await axios.put(`/api/cart-items/${cartItem.productId}`, {
-            deliveryOptionId: deliveryOption.id
+        // for real backend
+        // const updateDeliveryOption = async () => {
+        //   await axios.put(`/api/cart-items/${cartItem.productId}`, {
+        //     deliveryOptionId: deliveryOption.id
+        //   });
+        //   await loadCart();
+        // };
+
+        // for mocked data
+        const updateDeliveryOption = () => {
+          const updatedCart = cart.map((item) => {
+            if (item.productId === cartItem.productId) {
+              return {
+                ...item,
+                deliveryOptionId: deliveryOption.id,
+              };
+            }
+
+            return item;
           });
-          await loadCart();
+
+          loadCart(updatedCart);
         };
 
         return (
@@ -45,9 +60,7 @@ export function DeliveryOptions({ deliveryOptions, cartItem, loadCart }) {
                 )}
               </div>
 
-              <div className="delivery-option-price">
-                {priceString}
-              </div>
+              <div className="delivery-option-price">{priceString}</div>
             </div>
           </div>
         );

@@ -2,9 +2,7 @@ import { it, expect, describe, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Product } from "./Product";
-import axios from "axios";
-
-vi.mock("axios");
+import { cart } from "../../data/cart";
 
 describe("Product component", () => {
   let product;
@@ -12,6 +10,9 @@ describe("Product component", () => {
   let user;
 
   beforeEach(() => {
+    // The mock cart is module-level state, so reset it between tests.
+    cart.length = 0;
+
     product = {
       id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
       image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -58,17 +59,25 @@ describe("Product component", () => {
     const addToCartButton = screen.getByTestId("add-to-cart-button");
     await user.click(addToCartButton);
 
-    expect(axios.post).toHaveBeenCalledWith("/api/cart-items", {
-      productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-      quantity: 1,
-    });
+    expect(loadCart).toHaveBeenCalledWith([
+      {
+        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        quantity: 1,
+      },
+    ]);
 
-    expect(loadCart).toHaveBeenCalled();
+    expect(cart).toEqual([
+      {
+        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        quantity: 1,
+      },
+    ]);
   });
 
   //9c
   it("selects a quantity", async () => {
     render(<Product product={product} loadCart={loadCart} />);
+
     const quantitySelector = screen.getByTestId("product-quantity-container");
     const addToCartButton = screen.getByTestId("add-to-cart-button");
 
@@ -80,10 +89,13 @@ describe("Product component", () => {
     expect(quantitySelector).toHaveValue("3");
 
     await user.click(addToCartButton);
-    expect(axios.post).toHaveBeenCalledWith("/api/cart-items", {
-      productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-      quantity: 3,
-    });
+
+    expect(cart).toEqual([
+      {
+        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        quantity: 3,
+      },
+    ]);
     expect(loadCart).toHaveBeenCalledTimes(1);
   });
 });
