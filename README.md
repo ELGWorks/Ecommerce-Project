@@ -57,7 +57,7 @@
 ```text
 Ecommerce-Project/
 ├── frontend-demo/    → Demo frontend used for the hosted preview
-└── Fullstack/        → Complete application source code
+└── fullstack/        → Complete application source code
 ```
 
 ### Frontend Demo
