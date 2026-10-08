@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <b>An ecommerce website built using React.js + TypeScript</b>
+  <b>An ecommerce website built using React.js + TypeScript and Express</b>
 </p>
 
 ---
@@ -58,7 +58,8 @@ Ecommerce-Project/
 │
 ├── frontend-demo/
 │   └── Demo frontend used for the hosted preview
-│
+
+
 └── Fullstack/
     └── Complete application source code
 
