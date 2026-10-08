@@ -54,14 +54,11 @@
 
 ## 📂 Project Structure
 
+```text
 Ecommerce-Project/
-│
-├── frontend-demo/
-│   └── Demo frontend used for the hosted preview
-
-
-└── Fullstack/
-    └── Complete application source code
+├── frontend-demo/    → Demo frontend used for the hosted preview
+└── Fullstack/        → Complete application source code
+```
 
 ### Frontend Demo
 
